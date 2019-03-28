@@ -30,3 +30,35 @@ document.querySelector('#submit').addEventListener('click', e => {
   document.querySelector('#frequency').value = ''
 
 })
+
+db.collection('train-data').onSnapshot(({ docs }) => {
+  // gives the data in the submission
+
+  document.querySelector('#trainDisp').innerHTML = ''
+  docs.forEach(doc => {
+      console.log(doc.id);
+      
+      let { trainName, destination, firstTrainTime, frequency } = doc.data()
+      let docElem = document.createElement('div')
+
+      docElem.innerHTML = `
+      <div class="col-lg-12">
+          <div class="card card-default">
+              <div class="card-header">
+                  Train Schedule
+              </div id="loc-Store">
+
+              <div class="card-body" id="recent-member">
+              <h4 id="train-name">${trainName}</h4>
+              <h4 id="destination-display">Destination: ${destination}</h4>
+              <h4 id="firstTrain-display">First Train: ${firstTrainTime}</h4>
+              <h4 id="frequency-display">Frequency: ${frequency}</h4>
+              </div>
+          </div>
+      </div>
+      <hr>
+      `
+      document.querySelector('#trainDisp').append(docElem)
+
+  })
+})

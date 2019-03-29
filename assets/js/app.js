@@ -34,13 +34,13 @@ document.querySelector('#submit').addEventListener('click', e => {
 db.collection('train-data').onSnapshot(({ docs }) => {
   // gives the data in the submission
 
+  document.querySelector('tbody').innerHTML = ''
 
   docs.forEach(doc => {
       console.log(doc.id);
       
       let { trainName, destination, firstTrainTime, frequency } = doc.data()
       let docElem = document.createElement('tr')
-
       docElem.innerHTML = `
           <td>${trainName}</td>
           <td>${destination}</td>

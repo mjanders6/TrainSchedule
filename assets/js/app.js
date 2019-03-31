@@ -57,8 +57,17 @@ db.collection('train-data').onSnapshot(({ docs }) => {
           <td>${frequency}</td>
           <td>${nextStop.format("HH:mm")}</td>
           <td>${minAway}</td>
+          <button id="delBtn" data-btnid="${doc.id}">Delete</button>
       `
     document.querySelector('tbody').append(docElem)
   })
+
+})
+
+document.addEventListener('click', ({ target }) => {
+  console.log(target.dataset.btnid);
+  if (target.id === 'delBtn') {
+    db.collection('train-data').doc(target.dataset.btnid).delete()
+  }
 
 })

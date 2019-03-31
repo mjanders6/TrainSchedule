@@ -57,7 +57,7 @@ db.collection('train-data').onSnapshot(({ docs }) => {
           <td>${frequency}</td>
           <td>${nextStop.format("HH:mm")}</td>
           <td>${minAway}</td>
-          <button id="delBtn" data-btnid="${doc.id}">Delete</button>
+          <td><button id="delBtn" data-btnid="${doc.id}">Delete</button></td>
       `
     document.querySelector('tbody').append(docElem)
   })

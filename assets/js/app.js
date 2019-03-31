@@ -14,13 +14,15 @@ let db = firebase.firestore()
 
 let trainName, destination, firstTrainTime, frequency
 
+
+
 document.querySelector('#submit').addEventListener('click', e => {
   e.preventDefault()
   let id = db.collection('train-data').doc().id
 
   db.collection('train-data').doc(id).set({
     trainName: document.querySelector('#trainName').value,
-    destination: document.querySelector('#destination').value,  
+    destination: document.querySelector('#destination').value,
     firstTrainTime: document.querySelector('#firstTrainTime').value,
     frequency: document.querySelector('#frequency').value
   })
@@ -31,23 +33,32 @@ document.querySelector('#submit').addEventListener('click', e => {
 
 })
 
+
 db.collection('train-data').onSnapshot(({ docs }) => {
   // gives the data in the submission
 
   document.querySelector('tbody').innerHTML = ''
 
   docs.forEach(doc => {
-      console.log(doc.id);
-      
-      let { trainName, destination, firstTrainTime, frequency } = doc.data()
-      let docElem = document.createElement('tr')
-      docElem.innerHTML = `
+
+    let { trainName, destination, firstTrainTime, frequency } = doc.data()
+
+    let curTime = moment()
+    let iniStop = moment(firstTrainTime, "HH:mm")
+    let minutes = curTime.diff(iniStop, 'minutes')
+    let numStops = Math.ceil(minutes / frequency)
+    let nextStop = iniStop.add(numStops * frequency, 'minutes')
+    let minAway = nextStop.diff(curTime, 'minutes')
+
+    let docElem = document.createElement('tr')
+    docElem.innerHTML = `
           <td>${trainName}</td>
           <td>${destination}</td>
           <td>${frequency}</td>
-          <td>${firstTrainTime}</td>
+          <td>${nextStop.format("HH:mm")}</td>
+          <td>${minAway}</td>
       `
-      document.querySelector('tbody').append(docElem)
+    document.querySelector('tbody').append(docElem)
   })
 
 })

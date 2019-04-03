@@ -15,7 +15,7 @@ let db = firebase.firestore()
 let trainName, destination, firstTrainTime, frequency
 
 
-
+// add data to firestore. 
 document.querySelector('#submit').addEventListener('click', e => {
   e.preventDefault()
   let id = db.collection('train-data').doc().id
@@ -33,16 +33,17 @@ document.querySelector('#submit').addEventListener('click', e => {
 
 })
 
-
+// update the page when the DB is updated. 
 db.collection('train-data').onSnapshot(({ docs }) => {
-  // gives the data in the submission
 
   document.querySelector('tbody').innerHTML = ''
 
+  // loop through the DB
   docs.forEach(doc => {
 
     let { trainName, destination, firstTrainTime, frequency } = doc.data()
 
+    // calculate the time to the next stop and how many minutes to arrival
     let curTime = moment()
     let iniStop = moment(firstTrainTime, "HH:mm")
     let minutes = curTime.diff(iniStop, 'minutes')
@@ -50,6 +51,7 @@ db.collection('train-data').onSnapshot(({ docs }) => {
     let nextStop = iniStop.add(numStops * frequency, 'minutes')
     let minAway = nextStop.diff(curTime, 'minutes')
 
+    // create an element for the table. a button is added to remove a train. 
     let docElem = document.createElement('tr')
     docElem.innerHTML = `
           <td>${trainName}</td>
@@ -64,8 +66,9 @@ db.collection('train-data').onSnapshot(({ docs }) => {
 
 })
 
+// event listener to remove a train. 
 document.addEventListener('click', ({ target }) => {
-  console.log(target.dataset.btnid);
+  // console.log(target.dataset.btnid);
   if (target.id === 'delBtn') {
     db.collection('train-data').doc(target.dataset.btnid).delete()
   }

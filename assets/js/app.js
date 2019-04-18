@@ -20,7 +20,7 @@ document.querySelector('#submit').addEventListener('click', e => {
   e.preventDefault()
   let id = db.collection('train-data').doc().id
 
-  if (document.querySelector('#firstTrainTime').value === '') {
+  if (document.querySelector('#firstTrainTime').value === '' || document.querySelector('#trainName').value === '' || document.querySelector('#destination').value === '' || document.querySelector('#frequency').value === '') {
     document.querySelector('#err').innerHTML = 'Please Enter the Trains Start Time'
     document.querySelector('#trainName').value = ''
     document.querySelector('#destination').value = ''

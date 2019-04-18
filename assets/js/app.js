@@ -19,13 +19,13 @@ let trainName, destination, firstTrainTime, frequency
 document.querySelector('#submit').addEventListener('click', e => {
   e.preventDefault()
   let id = db.collection('train-data').doc().id
-
   db.collection('train-data').doc(id).set({
     trainName: document.querySelector('#trainName').value,
     destination: document.querySelector('#destination').value,
     firstTrainTime: document.querySelector('#firstTrainTime').value,
     frequency: document.querySelector('#frequency').value
   })
+
   document.querySelector('#trainName').value = ''
   document.querySelector('#destination').value = ''
   document.querySelector('#firstTrainTime').value = ''
@@ -35,14 +35,15 @@ document.querySelector('#submit').addEventListener('click', e => {
 
 // update the page when the DB is updated. 
 db.collection('train-data').onSnapshot(({ docs }) => {
-
+  
   document.querySelector('tbody').innerHTML = ''
 
   // loop through the DB
   docs.forEach(doc => {
-
+    
     let { trainName, destination, firstTrainTime, frequency } = doc.data()
-
+    
+    // console.log(doc.data());
     // calculate the time to the next stop and how many minutes to arrival
     let curTime = moment()
     let iniStop = moment(firstTrainTime, "HH:mm")
@@ -62,6 +63,7 @@ db.collection('train-data').onSnapshot(({ docs }) => {
           <td><button id="delBtn" data-btnid="${doc.id}">Delete</button></td>
       `
     document.querySelector('tbody').append(docElem)
+
   })
 
 })

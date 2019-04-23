@@ -34,6 +34,7 @@ document.querySelector('#submit').addEventListener('click', e => {
       frequency: document.querySelector('#frequency').value
     })
 
+    document.querySelector('#err').innerHTML = ''
     document.querySelector('#trainName').value = ''
     document.querySelector('#destination').value = ''
     document.querySelector('#firstTrainTime').value = ''

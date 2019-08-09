@@ -17,12 +17,12 @@ Simple app that allows a user to
 <ul>
     <li> REST API
     <li> Firebase
+    <li> HTML/CSS
     <li> HTML Query Selections
     <li> Javascript
  </ul>
 
  # Screenshots
-
  ## Table View
  ![Table](/assets/images/Table.png)
 

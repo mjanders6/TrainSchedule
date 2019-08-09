@@ -3,7 +3,7 @@
 Simple app that allows a user to 
 
 ## 1.1. Deployment:
-[Deployment](https://sheltered-cliffs-91931.herokuapp.com/) | https://sheltered-cliffs-91931.herokuapp.com
+[Deployment](https://mjanders6.github.io/TrainSchedule/) | https://mjanders6.github.io/TrainSchedule/
 
 ## 1.2. App Features:
 <ul>
@@ -24,7 +24,7 @@ Simple app that allows a user to
  # Screenshots
 
  ## Table View
- ![Table](/client/src/assets/Table.png)
+ ![Table](/imagesTable.png)
 
  ## Train Form
- ![Train-Form](/client/src/assets/Train-Form.png)
+ ![Train-Form](/imagesTrain-Form.png)

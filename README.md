@@ -24,7 +24,7 @@ Simple app that allows a user to
  # Screenshots
 
  ## Table View
- ![Table](/images/Table.png)
+ ![Table](/assets/images/Table.png)
 
  ## Train Form
- ![Train-Form](/images/Train-Form.png)
+ ![Train-Form](/assets/images/Train-Form.png)
